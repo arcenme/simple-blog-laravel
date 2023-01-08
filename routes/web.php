@@ -20,5 +20,5 @@ Route::get('', function () {
 
 Route::group(['prefix' => 'blog'], function () {
     Route::get('', [BlogController::class, 'index'])->name('blog');
-    Route::get('/{slug}', [BlogController::class, 'index'])->name('blog.detail');
+    Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.detail');
 });
