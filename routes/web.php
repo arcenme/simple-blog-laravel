@@ -14,4 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', [BlogController::class, 'index'])->name('blog');
+Route::get('', function () {
+    return redirect()->route('blog');
+})->name('index');
+
+Route::group(['prefix' => 'blog'], function () {
+    Route::get('', [BlogController::class, 'index'])->name('blog');
+    Route::get('/{slug}', [BlogController::class, 'index'])->name('blog.detail');
+});

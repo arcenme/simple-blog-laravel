@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\LandingPages;
 
 use App\Http\Controllers\Controller;
+use App\Services\BlogService;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -14,7 +15,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('pages.landing_pages.blog.index');
+        $blogs = BlogService::get();
+
+        return view('pages.landing_pages.blog.index', compact('blogs'));
     }
 
     /**
