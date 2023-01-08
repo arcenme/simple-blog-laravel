@@ -11,4 +11,4 @@
 <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 
 <!-- CSS Libraries -->
-@yield('custom-styles')
+@stack('custom-styles')

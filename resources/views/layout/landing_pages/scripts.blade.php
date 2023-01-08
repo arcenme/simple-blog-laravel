@@ -13,4 +13,4 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
-    @yield('custom-scripts')
+    @stack('custom-scripts')
