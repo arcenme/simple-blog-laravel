@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LandingPages\BlogController;
+use App\Http\Controllers\LandingPages\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,8 @@ Route::get('', function () {
 Route::group(['prefix' => 'blog'], function () {
     Route::get('', [BlogController::class, 'index'])->name('blog');
     Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.detail');
+
+    Route::group(['prefix' => 'comment'], function () {
+        Route::get('comment/{slug}', [CommentController::class, 'index'])->name('blog.comment');
+    });
 });
