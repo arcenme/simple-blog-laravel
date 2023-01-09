@@ -25,6 +25,10 @@ class BlogController extends Controller
 
     public function blogList()
     {
+        if (request()->ajax()) {
+            return BlogService::getTable();
+        }
+
         return view('pages.dashboard.post.index');
     }
 }

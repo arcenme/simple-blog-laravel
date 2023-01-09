@@ -16,4 +16,14 @@ class BlogService
 
         return $data;
     }
+
+    public static function getTable()
+    {
+        $data = Blog::select('title', 'slug', 'created_at as publish_date');
+
+        return datatables()
+            ->of($data)
+            ->addIndexColumn()
+            ->make(true);
+    }
 }
