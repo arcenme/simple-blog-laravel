@@ -10,7 +10,7 @@
         <div class="main-wrapper container">
             <div class="navbar-bg" style="max-height: 70px"></div>
             <nav class="navbar navbar-expand-lg main-navbar">
-                <a href="index.html" class="navbar-brand sidebar-gone-hide">{{ env('APP_NAME') }}</a>
+                <a href="{{ route('index') }}" class="navbar-brand sidebar-gone-hide">{{ env('APP_NAME') }}</a>
                 <div class="navbar-nav">
                     <a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
                 </div>
@@ -18,18 +18,13 @@
                 <div class="form-inline ml-auto"> </div>
                 <ul class="navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <div class="d-sm-none d-lg-inline-block">Hi, Admin</div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="" class="dropdown-item has-icon">
-                                <i class="fas fa-fire"></i> Dashboard
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
-                        </div>
+                        @if (auth('admin')->check())
+                            @include('layout.landing_pages.navbar_admin')
+                        @elseif (auth('user')->check())
+                            @include('layout.landing_pages.navbar_user')
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-warning btn-sm"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        @endif
                     </li>
                 </ul>
             </nav>

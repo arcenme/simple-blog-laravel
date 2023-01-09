@@ -6,18 +6,13 @@
     </form>
     <ul class="navbar-nav navbar-right">
         <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <div class="d-sm-none d-lg-inline-block">Hi, Admin</div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a href="#" class="dropdown-item has-icon">
-                    <i class="fas fa-fire"></i> Dashboard
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item has-icon text-danger">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            </div>
+            @if (auth('admin')->check())
+                @include('layout.dashboard.navbar_admin')
+            @elseif (auth('user')->check())
+                @include('layout.dashboard.navbar_user')
+            @else
+                <a href="{{ route('login') }}" class="btn btn-warning btn-sm"><i class="fas fa-sign-in-alt"></i> Login</a>
+            @endif
         </li>
     </ul>
 </nav>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingPages\BlogController;
 use App\Http\Controllers\LandingPages\CommentController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Auth::routes();
+
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'authenticated']);
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('', function () {
     return redirect()->route('blog');
