@@ -7,7 +7,14 @@
             <a href="{{ route('index') }}">AS</a>
         </div>
         <ul class="sidebar-menu">
-            <li><a class="nav-link" href=""><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+            <li class="{{ request()->segment(2) === 'blog' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('dashboard.blog') }}"> <i class="far fa-newspaper"></i> <span>Blog</span> </a>
+            </li>
+        </ul>
+        <ul class="sidebar-menu">
+            <li>
+                <a class="nav-link" href=""><i class="fas fa-sign-out-alt"></i> <span>Logout</span> </a>
+            </li>
         </ul>
     </aside>
 </div>

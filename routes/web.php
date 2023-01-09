@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingPages\BlogController;
 use App\Http\Controllers\LandingPages\CommentController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,11 +28,17 @@ Route::get('', function () {
 })->name('index');
 
 Route::group(['prefix' => 'blog'], function () {
-    Route::get('', [BlogController::class, 'index'])->name('blog');
-    Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.detail');
+    Route::get('', [BlogController::class, 'blog'])->name('blog');
+    Route::get('/{slug}', [BlogController::class, 'blogDetail'])->name('blog.detail');
 
     Route::group(['prefix' => 'comment'], function () {
         Route::get('comment/{slug}', [CommentController::class, 'index'])->name('blog.comment');
         Route::post('comment/{slug}', [CommentController::class, 'store']);
+    });
+});
+
+Route::group(['middleware' => 'auth:admin,user', 'prefix' => 'dashboard'], function () {
+    Route::group(['prefix' => 'blog'], function () {
+        Route::get('', [BlogController::class, 'blogList'])->name('dashboard.blog');
     });
 });

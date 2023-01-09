@@ -20,12 +20,7 @@
                     </div>
 
                     <div class="section-body">
-
-                        <div class="row">
-                            <div class="col-12 col-md-6 col-sm-12">
-
-                            </div>
-                        </div>
+                        @yield('content')
                     </div>
                 </section>
             </div>
