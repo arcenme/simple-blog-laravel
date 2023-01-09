@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Blog;
 use App\Models\Comment;
 
 class CommentService
@@ -17,5 +18,21 @@ class CommentService
             ->get();
 
         return $data;
+    }
+
+    public static function create(array $payload)
+    {
+        $blog = Blog::where('slug', $payload['slug'])
+            ->select('id')
+            ->first();
+
+        $comment = Comment::create([
+            'name' => $payload['fullname'],
+            'email' => $payload['email'],
+            'content' => $payload['comment'],
+            'blog_id' => $blog['id'],
+        ]);
+
+        return $comment;
     }
 }

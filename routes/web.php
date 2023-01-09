@@ -25,5 +25,6 @@ Route::group(['prefix' => 'blog'], function () {
 
     Route::group(['prefix' => 'comment'], function () {
         Route::get('comment/{slug}', [CommentController::class, 'index'])->name('blog.comment');
+        Route::post('comment/{slug}', [CommentController::class, 'store']);
     });
 });

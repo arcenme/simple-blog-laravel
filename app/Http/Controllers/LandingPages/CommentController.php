@@ -47,9 +47,22 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $slug)
     {
-        //
+        $request->merge(['slug' => $slug])
+            ->validate([
+                'slug' => 'bail|required|exists:blogs,slug',
+                'fullname' => 'bail|required|max:50',
+                'email' => 'bail|required|email:rfc,dns',
+                'comment' => 'bail|required|max:255'
+            ], ['slug.*' => 'Invalid blog entry.']);
+
+        CommentService::create($request->only('slug', 'fullname', 'email', 'comment'));
+
+        return response()->json([
+            'status' => 'true',
+            'message' => 'Comment added successfully'
+        ]);
     }
 
     /**
