@@ -43,7 +43,7 @@
                                                 <div class="invalid-feedback validationThumbnail">{{ $message }}</div>
                                             @enderror
                                             <div class="section-preview mt-3">
-                                                <img src="{{ old('thumbnail') ?? ($blog->has('thumbnail') ? env('APP_URL') . '/storage/' . $blog['thumbnail'] : '') }}" alt="" class="img-preview img-fluid">
+                                                <img src="{{ old('thumbnail') ?? ($blog && $blog['thumbnail'] ? env('APP_URL') . '/storage/' . $blog['thumbnail'] : '') }}" alt="" class="img-preview img-fluid">
                                             </div>
                                         </div>
                                     </div>

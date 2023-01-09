@@ -34,11 +34,11 @@ class BlogController extends Controller
 
     public function blogPost()
     {
-        $blog = collect([]);
+        $blog = [];
 
         // action = edit
         if (request()->has('slug'))
-            $blog = BlogDetailService::show(request('slug'));
+            $blog = BlogDetailService::show(request('slug'))->toArray();
 
         return view('pages.dashboard.post.post', compact('blog'));
     }
@@ -70,6 +70,6 @@ class BlogController extends Controller
         BlogService::create($payload);
 
         // return
-        return redirect()->route('dashboard.blog')->with('message', 'Post added successfully');
+        return redirect()->route('dashboard.blog')->with('success', 'Data saved successfully');
     }
 }
