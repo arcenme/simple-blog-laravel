@@ -41,6 +41,6 @@ Route::group(['middleware' => 'auth:admin,user', 'prefix' => 'dashboard'], funct
     Route::group(['prefix' => 'blog'], function () {
         Route::get('', [BlogController::class, 'blogList'])->name('dashboard.blog');
         Route::get('post', [BlogController::class, 'blogPost'])->name('dashboard.blog.post');
-        Route::post('post', [BlogController::class, 'blogPost']);
+        Route::post('post', [BlogController::class, 'createBlog']);
     });
 });

@@ -19,11 +19,33 @@ class BlogService
 
     public static function getTable()
     {
-        $data = Blog::select('title', 'slug', 'created_at as publish_date');
+        $data = Blog::latest()
+            ->select('title', 'slug', 'created_at as publish_date');
 
         return datatables()
             ->of($data)
             ->addIndexColumn()
             ->make(true);
+    }
+
+    public static function create($payload)
+    {
+        // data to be inserted
+        $data = [
+            'title' =>  $payload['title'],
+            'slug' =>  $payload['title_slug'],
+            'content' =>  $payload['content'],
+        ];
+
+        // add thumbnail
+        if ($payload->has('thumbnail'))
+            $data['thumbnail'] =  $payload['thumbnail'];
+
+        // create or update
+        $blog =   Blog::updateOrCreate([
+            'slug' => $payload['slug']
+        ], $data);
+
+        return $blog;
     }
 }

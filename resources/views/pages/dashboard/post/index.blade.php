@@ -65,7 +65,7 @@
                 }, {
                     className: 'border-right',
                     data: 'publish_date',
-                    name: 'publish_date',
+                    name: 'created_at',
                     render: function(data) {
                         return moment(data).format('DD MMMM YYYY HH:mm')
                     }

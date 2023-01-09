@@ -20,26 +20,40 @@
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="text" id="title" name="title" class="form-control">
-                                            <div class="invalid-feedback validationTitle"></div>
+                                            <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') ?? ($blog['title'] ?? '') }}">
+                                            @error('title')
+                                                <div class="invalid-feedback validationTitle">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title Slug</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" id="title_slug" name="title_slug" class="form-control @error('title_slug') is-invalid @enderror" value="{{ old('slug') ?? ($blog['slug'] ?? '') }}">
+                                            @error('title_slug')
+                                                <div class="invalid-feedback validationTitleSlug">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="file" id="thumbnail" name="thumbnail" accept="image/*" class="form-control">
-                                            <div class="invalid-feedback validationThumbnail"></div>
-
-                                            <div class="section-preview ">
-                                                <img src="" alt="" class="img-preview img-fluid">
+                                            <input type="file" id="thumbnail" name="thumbnail" accept="image/*" class="form-control @error('thumbnail') is-invalid @enderror" value="{{ old('thumbnail') ?? '' }}">
+                                            @error('thumbnail')
+                                                <div class="invalid-feedback validationThumbnail">{{ $message }}</div>
+                                            @enderror
+                                            <div class="section-preview mt-3">
+                                                <img src="{{ old('thumbnail') ?? ($blog->has('thumbnail') ? env('APP_URL') . '/storage/' . $blog['thumbnail'] : '') }}" alt="" class="img-preview img-fluid">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <textarea class="summernote" id="content" name="content"></textarea>
-                                            <div class="invalid-feedback validationContent"></div>
+                                            <textarea class="summernote form-control @error('content') is-invalid @enderror" id="content" name="content">{{ old('content') ?? ($blog['content'] ?? '') }}</textarea>
+                                            @error('content')
+                                                <div class="invalid-feedback validationContent">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
@@ -74,10 +88,19 @@
             reader.readAsDataURL(this.files[0]);
         })
 
-        // content
+        // crewate slug
+        $('#title').keyup(function() {
+            const slug = $(this).val().toLowerCase()
+                .replace(/[^\w ]+/g, '')
+                .replace(/ +/g, '-')
+
+            $('#title_slug').val(slug)
+        })
+
+        //setup content
         $('#summernote').summernote({
             tabsize: 2,
-            height: 100
+            height: 100,
         });
     </script>
 @endpush

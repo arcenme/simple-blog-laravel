@@ -5,7 +5,7 @@ namespace App\Http\Controllers\LandingPages;
 use App\Http\Controllers\Controller;
 use App\Services\BlogDetailService;
 use App\Services\BlogService;
-use Illuminate\Http\Request;
+use Stevebauman\Purify\Facades\Purify;
 
 class BlogController extends Controller
 {
@@ -41,5 +41,35 @@ class BlogController extends Controller
             $blog = BlogDetailService::show(request('slug'));
 
         return view('pages.dashboard.post.post', compact('blog'));
+    }
+
+    public function createBlog()
+    {
+        request()->validate([
+            'slug' => 'bail|nullable|exists:blogs,slug',
+            'title' => 'bail|required|max:200',
+            'thumbnail' => 'bail|required_without:slug|image|max:1024',
+            'title_slug' => 'bail|required|max:255',
+            'content' => 'bail|required|max:65535'
+        ], ['content.max' => 'The content field is to long.']);
+
+        // create or update data
+        $payload = collect([
+            'slug' =>  request('slug'),
+            'title' =>  request('title'),
+            'title_slug' =>  request('title_slug'),
+            'content' =>  Purify::clean(request('content')),
+        ]);
+
+        // save file
+        if (request()->file('thumbnail')) {
+            $fileName = request()->file('thumbnail')->store('blog/' . auth()->id());
+            $payload['thumbnail'] = $fileName;
+        }
+
+        BlogService::create($payload);
+
+        // return
+        return redirect()->route('dashboard.blog')->with('message', 'Post added successfully');
     }
 }
