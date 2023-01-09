@@ -78,8 +78,9 @@
                     searchable: false,
                     orderable: false,
                     render: function(data, type, raw) {
+                        console.log
                         return `<a href="" class="btn btn-info btn-sm mx-1" data-slug="${raw.slug}" data-toggle="tooltip" data-placement="top" title="Comment"><i class="fas fa-comments"></i></a>
-                        <a href="" class="btn btn-warning btn-sm mx-1" data-slug="${raw.slug}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></a>
+                        <a href="{{ route('dashboard.blog.post') }}?slug=${raw.slug}" class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></a>
                         <a href="" class="btn btn-danger btn-sm mx-1" data-slug="${raw.slug}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></a>`
                     }
                 }],

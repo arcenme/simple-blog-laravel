@@ -40,5 +40,7 @@ Route::group(['prefix' => 'blog'], function () {
 Route::group(['middleware' => 'auth:admin,user', 'prefix' => 'dashboard'], function () {
     Route::group(['prefix' => 'blog'], function () {
         Route::get('', [BlogController::class, 'blogList'])->name('dashboard.blog');
+        Route::get('post', [BlogController::class, 'blogPost'])->name('dashboard.blog.post');
+        Route::post('post', [BlogController::class, 'blogPost']);
     });
 });

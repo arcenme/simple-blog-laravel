@@ -11,7 +11,7 @@ class BlogDetailService
         $data = Blog::with(['author' => function ($query) {
             return $query->select('id', 'name');
         }])
-            ->select('title', 'slug', 'content', 'created_by', 'updated_at')
+            ->select('title', 'slug', 'content', 'thumbnail', 'created_by', 'updated_at')
             ->where('slug', $slug)
             ->firstOrFail();
 

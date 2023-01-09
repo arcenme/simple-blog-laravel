@@ -31,4 +31,15 @@ class BlogController extends Controller
 
         return view('pages.dashboard.post.index');
     }
+
+    public function blogPost()
+    {
+        $blog = collect([]);
+
+        // action = edit
+        if (request()->has('slug'))
+            $blog = BlogDetailService::show(request('slug'));
+
+        return view('pages.dashboard.post.post', compact('blog'));
+    }
 }
