@@ -21,6 +21,7 @@ class BlogFactory extends Factory
             'title' => $this->faker->text(mt_rand(50, 100)),
             'slug' => $this->faker->slug(7),
             'content' => '<p>' . implode('</p><p>', $this->faker->paragraphs(mt_rand(5, 10))) . '</p>',
+            'thumbnail' => $this->faker->image(null, 640, 480),
             'created_by' => $user,
             'updated_by' => $user,
         ];
