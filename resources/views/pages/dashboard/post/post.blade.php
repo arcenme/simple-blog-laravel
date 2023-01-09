@@ -3,10 +3,7 @@
 @section('title', $blog ? 'Edit Post' : 'Add Post')
 
 @push('custom-styles')
-    <link rel="stylesheet" href="../node_modules/summernote/dist/summernote-bs4.css">
-    <link rel="stylesheet" href="../node_modules/codemirror/lib/codemirror.css">
-    <link rel="stylesheet" href="../node_modules/codemirror/theme/duotone-dark.css">
-    <link rel="stylesheet" href="../node_modules/selectric/public/selectric.css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -33,8 +30,8 @@
                                             <input type="file" id="thumbnail" name="thumbnail" accept="image/*" class="form-control">
                                             <div class="invalid-feedback validationThumbnail"></div>
 
-                                            <div class="section-preview mt-3">
-                                                <img src="" alt="preview" class="img-preview img-fluid">
+                                            <div class="section-preview ">
+                                                <img src="" alt="" class="img-preview img-fluid">
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +60,9 @@
 @endsection
 
 @push('custom-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script>
+        // preview thumbnail
         $('#thumbnail').change(function(e) {
             $('.img-preview').css('display', 'block')
 
@@ -74,5 +73,11 @@
             }
             reader.readAsDataURL(this.files[0]);
         })
+
+        // content
+        $('#summernote').summernote({
+            tabsize: 2,
+            height: 100
+        });
     </script>
 @endpush
