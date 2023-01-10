@@ -142,6 +142,10 @@
             });
 
             if (params.slug) {
+                // change flter to all
+                $('#filter').val('all').change()
+
+                // search by query strng (slug)
                 tableComment
                     .search(params.slug)
                     .draw();
