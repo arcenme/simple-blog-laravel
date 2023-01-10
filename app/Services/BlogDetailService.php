@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Blog;
+use Illuminate\Support\Facades\Storage;
 
 class BlogDetailService
 {
@@ -16,5 +17,23 @@ class BlogDetailService
             ->firstOrFail();
 
         return $data;
+    }
+
+    public static function getBySlug($slug)
+    {
+        $data = Blog::where('slug', $slug)->first();
+
+        return $data;
+    }
+
+    public static function deleteThumbnail($path): void
+    {
+        if (Storage::exists($path))
+            Storage::delete($path);
+    }
+
+    public static function deleteBlog(int $id): void
+    {
+        Blog::where('id', $id)->delete();
     }
 }

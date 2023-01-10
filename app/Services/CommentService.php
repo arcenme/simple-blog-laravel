@@ -35,4 +35,9 @@ class CommentService
 
         return $comment;
     }
+
+    public static function deleteByBlog($blogId): void
+    {
+        Comment::where('blog_id', $blogId)->delete();
+    }
 }

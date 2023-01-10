@@ -5,6 +5,8 @@ namespace App\Http\Controllers\LandingPages;
 use App\Http\Controllers\Controller;
 use App\Services\BlogDetailService;
 use App\Services\BlogService;
+use App\Services\CommentService;
+use App\Services\ErrorService;
 use Stevebauman\Purify\Facades\Purify;
 
 class BlogController extends Controller
@@ -71,5 +73,30 @@ class BlogController extends Controller
 
         // return
         return redirect()->route('dashboard.blog')->with('success', 'Data saved successfully');
+    }
+
+    public function deleteBlog()
+    {
+        request()->validate(['slug' => 'bail|required']);
+
+        // get blog data
+        $blog = BlogDetailService::getBySlug(request('slug'));
+        if (!$blog)
+            return ErrorService::returnJson(404, 'Data not found.');
+
+        // delete comments
+        CommentService::deleteByBlog($blog->id);
+
+        // delete thumbnail
+        BlogDetailService::deleteThumbnail($blog->thumbnail);
+
+        // delete data
+        $blog->delete();
+
+        // return
+        return response()->json([
+            'status' => true,
+            'message' => 'Data deleted successfully'
+        ]);
     }
 }
