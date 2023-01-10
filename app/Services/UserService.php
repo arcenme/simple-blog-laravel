@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Html\Editor\Fields\Boolean;
 
 class UserService
 {
@@ -20,5 +22,18 @@ class UserService
     {
         User::where('id', auth()->id())
             ->update($payload);
+    }
+
+    public static function updatePassword($password): void
+    {
+        User::where('id', auth()->id())
+            ->update(['password' => Hash::make($password)]);
+    }
+
+    public static function checkPassword($password): Bool
+    {
+        $isValid = Hash::check($password, auth()->user()->password);
+
+        return $isValid;
     }
 }

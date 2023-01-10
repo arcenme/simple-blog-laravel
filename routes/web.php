@@ -50,5 +50,6 @@ Route::group(['middleware' => 'auth:admin,user', 'prefix' => 'dashboard'], funct
     Route::group(['prefix' => 'profile'], function () {
         Route::get('', [UserController::class, 'index'])->name('dashboard.profile');
         Route::put('', [UserController::class, 'updateProfile']);
+        Route::put('password', [UserController::class, 'updatePassword'])->name('dashboard.profile.password');
     });
 });

@@ -13,7 +13,7 @@
         </ul>
         <ul class="sidebar-menu">
             <li class="{{ request()->segment(2) === 'profile' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard.profile') }}"> <i class="far fa-newspaper"></i> <span>Profile</span> </a>
+                <a class="nav-link" href="{{ route('dashboard.profile') }}"> <i class="far fa-user"></i> <span>Profile</span> </a>
             </li>
         </ul>
         <ul class="sidebar-menu">
