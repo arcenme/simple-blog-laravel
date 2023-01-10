@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Dashboard\CommentController as DashboardCommentController;
 use App\Http\Controllers\LandingPages\BlogController;
 use App\Http\Controllers\LandingPages\CommentController;
 use App\Http\Controllers\PostController;
@@ -51,5 +52,10 @@ Route::group(['middleware' => 'auth:admin,user', 'prefix' => 'dashboard'], funct
         Route::get('', [UserController::class, 'index'])->name('dashboard.profile');
         Route::put('', [UserController::class, 'updateProfile']);
         Route::put('password', [UserController::class, 'updatePassword'])->name('dashboard.profile.password');
+    });
+
+    Route::group(['prefix' => 'comment'], function () {
+        Route::get('', [DashboardCommentController::class, 'index'])->name('dashboard.comment');
+        Route::delete('', [DashboardCommentController::class, 'destroy']);
     });
 });

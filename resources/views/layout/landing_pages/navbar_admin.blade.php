@@ -5,7 +5,7 @@
     <a href="{{ route('dashboard.blog') }}" class="dropdown-item has-icon">
         <i class="far fa-newspaper"></i> Blog Entry
     </a>
-    <a href="" class="dropdown-item has-icon">
+    <a href="{{ route('dashboard.comment') }}" class="dropdown-item has-icon">
         <i class="fas fa-comments"></i> Comments
     </a>
     <a href="{{ route('dashboard.profile') }}" class="dropdown-item has-icon">
