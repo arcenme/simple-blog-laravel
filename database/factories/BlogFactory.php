@@ -16,7 +16,7 @@ class BlogFactory extends Factory
      */
     public function definition()
     {
-        $user = mt_rand(1, 5);
+        $user = mt_rand(1, 3);
         return [
             'title' => $this->faker->text(mt_rand(50, 100)),
             'slug' => $this->faker->slug(7),

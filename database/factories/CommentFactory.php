@@ -16,9 +16,12 @@ class CommentFactory extends Factory
      */
     public function definition()
     {
+        $emails = ['hello@arcen.me', 'john@gmail.com', 'albert@gmail.com'];
+        $random = mt_rand(0, 6);
+
         return [
             'name' => fake()->name(),
-            'email' => fake()->safeEmail(),
+            'email' => $random >= 3 ? fake()->safeEmail() : $emails[$random],
             'content' => $this->faker->text(mt_rand(50, 255)),
             'blog_id' => mt_rand(1, 50),
         ];
