@@ -28,7 +28,13 @@ class BlogService
             ->make(true);
     }
 
-    public static function create($payload)
+    public static function create($payload): void
+    {
+        // craete data
+        Blog::create($payload);
+    }
+
+    public static function update($payload): void
     {
         // data to be inserted
         $data = [
@@ -41,11 +47,8 @@ class BlogService
         if ($payload->has('thumbnail'))
             $data['thumbnail'] =  $payload['thumbnail'];
 
-        // create or update
-        $blog =   Blog::updateOrCreate([
-            'slug' => $payload['slug']
-        ], $data);
-
-        return $blog;
+        // update data
+        Blog::where('slug', $payload['slug'])
+            ->update($data);
     }
 }

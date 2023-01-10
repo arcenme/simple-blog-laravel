@@ -16,6 +16,7 @@
                             <div class="card-body">
                                 <form method="POST" action="{{ route('dashboard.blog.post') }}" enctype="multipart/form-data">
                                     @csrf
+                                    @method($blog ? 'PUT' : 'POST')
                                     <input type="hidden" id="slug" name="slug" value="{{ $blog['slug'] ?? '' }}">
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
@@ -29,7 +30,7 @@
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title Slug</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="text" id="title_slug" name="title_slug" class="form-control @error('title_slug') is-invalid @enderror" value="{{ old('slug') ?? ($blog['slug'] ?? '') }}">
+                                            <input type="text" id="title_slug" name="title_slug" class="form-control @error('title_slug') is-invalid @enderror" value="{{ old('title_slug') ?? ($blog['slug'] ?? '') }}">
                                             @error('title_slug')
                                                 <div class="invalid-feedback validationTitleSlug">{{ $message }}</div>
                                             @enderror

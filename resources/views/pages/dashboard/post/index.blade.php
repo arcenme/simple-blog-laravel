@@ -11,7 +11,7 @@
 @section('content')
     <div class="card">
         <div class="card-header d-flex flex-row-reverse py-0">
-            <button class="btn btn-success" id="add-post"><i class="fa fa-plus-square"></i> Add New Post</button>
+            <a href="{{ route('dashboard.blog.post') }}" class="btn btn-success"><i class="fa fa-plus-square"></i> Add Ne Posst</a>
         </div>
         <div class="card-body pt-1">
             <div class="x_content">
