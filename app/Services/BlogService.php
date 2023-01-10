@@ -22,6 +22,10 @@ class BlogService
         $data = Blog::latest()
             ->select('title', 'slug', 'created_at as publish_date');
 
+        // fetch only blog if user is creator or admin filter is "mine"
+        if ((auth()->guard('admin')->check() && request()->has('filter') && request('filter') === 'mine')   || (auth()->guard('user')->check()))
+            $data->where('created_by', auth()->id());
+
         return datatables()
             ->of($data)
             ->addIndexColumn()

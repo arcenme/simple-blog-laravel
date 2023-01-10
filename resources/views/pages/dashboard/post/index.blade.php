@@ -10,8 +10,23 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header d-flex flex-row-reverse py-0">
-            <a href="{{ route('dashboard.blog.post') }}" class="btn btn-success"><i class="fa fa-plus-square"></i> Add Ne Posst</a>
+        <div class="card-header d-flex">
+            @if (auth('admin')->check())
+                <div class="p-2">
+                    <div class="row mx-2">
+                        <label for="filter" class="col-form-label pl-0 pr-3">Filter</label>
+                        <div>
+                            <select class="form-control px-3" id="filter" name="filter" style="width: 100px">
+                                <option value="all">All</option>
+                                <option value="mine" selected>My Post</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            <div class="ml-auto p-2">
+                <a href="{{ route('dashboard.blog.post') }}" class="btn btn-success"><i class="fa fa-plus-square"></i> Add New Posst</a>
+            </div>
         </div>
         <div class="card-body pt-1">
             <div class="x_content">
@@ -92,7 +107,11 @@
                 ],
                 ajax: {
                     type: "GET",
-                    url: "{{ route('dashboard.blog') }}"
+                    url: "{{ route('dashboard.blog') }}",
+                    data: function(d) {
+                        d.filter = $('#filter').val()
+                        return d;
+                    }
                 },
                 columns: [{
                     data: 'DT_RowIndex',
@@ -123,6 +142,11 @@
                     }
                 }],
             });
+
+            // reload datatable
+            $('#filter').change(function() {
+                tableBlog.ajax.reload()
+            })
 
             // delete modal
             $('body').on('click', '.btn-delete-blog', function() {
