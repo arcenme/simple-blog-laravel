@@ -13,7 +13,7 @@
         </ul>
         <ul class="sidebar-menu">
             <li>
-                <a class="nav-link" href=""><i class="fas fa-sign-out-alt"></i> <span>Logout</span> </a>
+                <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span> </a>
             </li>
         </ul>
     </aside>
