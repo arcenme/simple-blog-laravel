@@ -56,7 +56,7 @@
 
 @section('modals')
 
-    @if (auth('admn')->check())
+    @if (auth('admin')->check())
         <!-- Start Delete Modal -->
         <div class="modal fade" tabindex="-1" role="dialog" id="delete-modal" data-backdrop="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
