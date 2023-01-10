@@ -8,7 +8,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="{{ request()->segment(2) === 'blog' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard.blog') }}"> <i class="far fa-newspaper"></i> <span>Blog</span> </a>
+                <a class="nav-link" href="{{ route('dashboard.blog') }}"> <i class="far fa-newspaper"></i> <span>Blog Entry</span> </a>
             </li>
         </ul>
         <ul class="sidebar-menu">

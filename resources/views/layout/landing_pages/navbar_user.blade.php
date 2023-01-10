@@ -3,7 +3,7 @@
 </a>
 <div class="dropdown-menu dropdown-menu-right">
     <a href="{{ route('dashboard.blog') }}" class="dropdown-item has-icon">
-        <i class="far fa-newspaper"></i> Blog
+        <i class="far fa-newspaper"></i> Blog Entry
     </a>
     <div class="dropdown-divider"></div>
     <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">

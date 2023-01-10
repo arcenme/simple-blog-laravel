@@ -3,7 +3,7 @@
 </a>
 <div class="dropdown-menu dropdown-menu-right">
     <a href="{{ route('dashboard.blog') }}" class="dropdown-item has-icon">
-        <i class="far fa-newspaper"></i> Blog
+        <i class="far fa-newspaper"></i> Blog Entry
     </a>
     <a href="" class="dropdown-item has-icon">
         <i class="fas fa-comments"></i> Comments

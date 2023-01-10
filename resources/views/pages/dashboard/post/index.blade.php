@@ -1,6 +1,6 @@
 @extends('layout.dashboard.app')
 
-@section('title', 'Post Blog')
+@section('title', 'Blog Entry')
 
 @push('custom-styles')
     <link href="{{ asset('assets/vendor/izitoast/dist/css/iziToast.min.css') }}" rel="stylesheet">
