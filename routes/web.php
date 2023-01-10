@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Dashboard\BlogController as DashboardBlogController;
 use App\Http\Controllers\Dashboard\CommentController as DashboardCommentController;
+use App\Http\Controllers\Dashboard\UserController as DashboardUserController;
 use App\Http\Controllers\LandingPages\BlogController;
 use App\Http\Controllers\LandingPages\CommentController;
 use App\Http\Controllers\PostController;
@@ -30,8 +32,8 @@ Route::get('', function () {
 })->name('index');
 
 Route::group(['prefix' => 'blog'], function () {
-    Route::get('', [BlogController::class, 'blog'])->name('blog');
-    Route::get('/{slug}', [BlogController::class, 'blogDetail'])->name('blog.detail');
+    Route::get('', [BlogController::class, 'index'])->name('blog');
+    Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.detail');
 
     Route::group(['prefix' => 'comment'], function () {
         Route::get('comment/{slug}', [CommentController::class, 'index'])->name('blog.comment');
@@ -41,17 +43,17 @@ Route::group(['prefix' => 'blog'], function () {
 
 Route::group(['middleware' => 'auth:admin,user', 'prefix' => 'dashboard'], function () {
     Route::group(['prefix' => 'blog'], function () {
-        Route::get('', [BlogController::class, 'blogList'])->name('dashboard.blog');
-        Route::get('post', [BlogController::class, 'blogPost'])->name('dashboard.blog.post');
-        Route::post('post', [BlogController::class, 'createBlog']);
-        Route::put('post', [BlogController::class, 'updateBlog']);
-        Route::delete('post', [BlogController::class, 'deleteBlog'])->middleware('auth:admin');
+        Route::get('', [DashboardBlogController::class, 'index'])->name('dashboard.blog');
+        Route::get('post', [DashboardBlogController::class, 'show'])->name('dashboard.blog.post');
+        Route::post('post', [DashboardBlogController::class, 'create']);
+        Route::put('post', [DashboardBlogController::class, 'update']);
+        Route::delete('post', [DashboardBlogController::class, 'destroy'])->middleware('auth:admin');
     });
 
     Route::group(['prefix' => 'profile'], function () {
-        Route::get('', [UserController::class, 'index'])->name('dashboard.profile');
-        Route::put('', [UserController::class, 'updateProfile']);
-        Route::put('password', [UserController::class, 'updatePassword'])->name('dashboard.profile.password');
+        Route::get('', [DashboardUserController::class, 'index'])->name('dashboard.profile');
+        Route::put('', [DashboardUserController::class, 'updateProfile']);
+        Route::put('password', [DashboardUserController::class, 'updatePassword'])->name('dashboard.profile.password');
     });
 
     Route::group(['prefix' => 'comment'], function () {
