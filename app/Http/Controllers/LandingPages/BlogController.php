@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\LandingPages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Services\BlogDetailService;
 use App\Services\BlogService;
 use App\Services\CommentService;
@@ -40,8 +41,13 @@ class BlogController extends Controller
         $blog = [];
 
         // action = edit
-        if (request()->has('slug'))
-            $blog = BlogDetailService::show(request('slug'))->toArray();
+        if (request()->has('slug')) {
+            $blog = BlogDetailService::show(request('slug'));
+            // policy
+            $this->authorize('update', $blog);
+
+            $blog = $blog->toArray();
+        }
 
         return view('pages.dashboard.blog.post', compact('blog'));
     }
