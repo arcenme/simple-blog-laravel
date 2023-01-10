@@ -5,6 +5,9 @@
     <a href="{{ route('dashboard.blog') }}" class="dropdown-item has-icon">
         <i class="far fa-newspaper"></i> Blog Entry
     </a>
+    <a href="{{ route('dashboard.profile') }}" class="dropdown-item has-icon">
+        <i class="fas fa-user"></i> Profile
+    </a>
     <div class="dropdown-divider"></div>
     <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">
         <i class="fas fa-sign-out-alt"></i> Logout

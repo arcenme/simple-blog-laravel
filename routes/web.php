@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LandingPages\BlogController;
 use App\Http\Controllers\LandingPages\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,5 +45,10 @@ Route::group(['middleware' => 'auth:admin,user', 'prefix' => 'dashboard'], funct
         Route::post('post', [BlogController::class, 'createBlog']);
         Route::put('post', [BlogController::class, 'updateBlog']);
         Route::delete('post', [BlogController::class, 'deleteBlog']);
+    });
+
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('', [UserController::class, 'index'])->name('dashboard.profile');
+        Route::put('', [UserController::class, 'updateProfile']);
     });
 });

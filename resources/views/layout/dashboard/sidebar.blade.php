@@ -12,6 +12,11 @@
             </li>
         </ul>
         <ul class="sidebar-menu">
+            <li class="{{ request()->segment(2) === 'profile' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('dashboard.profile') }}"> <i class="far fa-newspaper"></i> <span>Profile</span> </a>
+            </li>
+        </ul>
+        <ul class="sidebar-menu">
             <li>
                 <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span> </a>
             </li>

@@ -15,4 +15,10 @@ class UserService
 
         return $user;
     }
+
+    public static function updateProfile($payload): void
+    {
+        User::where('id', auth()->id())
+            ->update($payload);
+    }
 }
