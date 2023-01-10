@@ -32,7 +32,7 @@ class BlogController extends Controller
             return BlogService::getTable();
         }
 
-        return view('pages.dashboard.post.index');
+        return view('pages.dashboard.blog.index');
     }
 
     public function blogPost()
@@ -43,7 +43,7 @@ class BlogController extends Controller
         if (request()->has('slug'))
             $blog = BlogDetailService::show(request('slug'))->toArray();
 
-        return view('pages.dashboard.post.post', compact('blog'));
+        return view('pages.dashboard.blog.post', compact('blog'));
     }
 
     public function createBlog()
