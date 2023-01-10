@@ -55,29 +55,31 @@
 @endsection
 
 @section('modals')
-    <!-- Start Delete Modal -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="delete-modal" data-backdrop="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <input type="hidden" name="delete-slug" id="delete-slug">
-                <div class="modal-header">
-                    <h5 class="modal-title">Delete</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="text-danger"><b>data will be lost forever, are you sure? </b></p>
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                    <button type="button" class="btn btn-secondary text-dark" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" name="submit-delete-modal" id="submit-delete-modal">Delete</button>
+
+    @if (auth('admn')->check())
+        <!-- Start Delete Modal -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="delete-modal" data-backdrop="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <input type="hidden" name="delete-slug" id="delete-slug">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-danger"><b>data will be lost forever, are you sure? </b></p>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="button" class="btn btn-secondary text-dark" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" name="submit-delete-modal" id="submit-delete-modal">Delete</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- End Delete Modal -->
-
+        <!-- End Delete Modal -->
+    @endif
 @endsection
 
 @push('custom-scripts')
