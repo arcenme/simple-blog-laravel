@@ -139,7 +139,7 @@
                     render: function(data, type, raw) {
                         const isAdmin = "{{ auth('admin')->check() ? '1' : '0' }}";
 
-                        return `<a href="" class="btn btn-info btn-sm mx-1" data-slug="${raw.slug}" data-toggle="tooltip" data-placement="top" title="Comment"><i class="fas fa-comments"></i></a>
+                        return `<a href="{{ route('dashboard.comment') }}?slug=${raw.slug}" class="btn btn-info btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Comment"><i class="fas fa-comments"></i></a>
                                 <a href="{{ route('dashboard.blog.post') }}?slug=${raw.slug}" class="btn btn-warning btn-sm mx-1" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></a>
                                 ${isAdmin == '1' ? `<button type="button" class="btn btn-danger btn-delete-blog btn-sm mx-1" data-slug="${raw.slug}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></button>` : ''}`
                     }

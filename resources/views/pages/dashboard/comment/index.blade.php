@@ -129,13 +129,23 @@
                     name: 'comments.content',
                 }, {
                     className: 'border-right text-center',
-                    searchable: false,
-                    orderable: false,
+                    name: 'blogs.slug',
                     render: function(data, type, raw) {
                         return `<button type="button" class="btn btn-danger btn-delete-blog btn-sm mx-1" data-id="${raw.id}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></button>`
                     }
                 }],
             });
+
+            // default search
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+
+            if (params.slug) {
+                tableComment
+                    .search(params.slug)
+                    .draw();
+            }
 
             // reload datatable
             $('#filter').change(function() {

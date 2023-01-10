@@ -23,7 +23,7 @@ class CommentService
     public static function getTable()
     {
         $data = Comment::join('blogs', 'comments.blog_id', 'blogs.id')
-            ->select('comments.id', 'comments.name', 'comments.email', 'comments.content', 'comments.created_at')
+            ->select('comments.id', 'comments.name', 'comments.email', 'comments.content', 'comments.created_at', 'blogs.slug')
             ->latest();
 
         // fetch only blog if user is creator or admin filter is "mine"
