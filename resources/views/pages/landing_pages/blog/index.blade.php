@@ -11,7 +11,7 @@
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                             <article class="article article-style-b">
                                 <div class="article-header">
-                                    <div class="article-image" data-background="../assets/img/news/img15.jpg"> </div>
+                                    <div class="article-image" data-background="{{ asset('storage/' . $blog->thumbnail) }}"> </div>
                                     <div class="article-badge">
                                         <div class="article-badge-item bg-danger"><i class="far fa-comments"></i> {{ $blog->comment }}</div>
                                     </div>
