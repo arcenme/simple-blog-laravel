@@ -3,7 +3,7 @@
 ## Requirements
 
 -   MySQL installed
--   PHP (Minimum PHP version of 8.0)
+-   PHP >= 8.0
 
 ## Installation
 
@@ -71,3 +71,10 @@ php artisan serve
 -   Entries Admin
 -   Comment Management
 -   User profile
+
+## Credits
+
+-   Dashboard template by [Stisla](https://getstisla.com/)
+-   Data tables by [yajrabox](https://yajrabox.com/docs/laravel-datatables/10.0)
+-   Authentication by [Laravel UI](https://github.com/laravel/ui)
+-   HTMLPurifier by [ezyang](https://github.com/stevebauman/purify)
